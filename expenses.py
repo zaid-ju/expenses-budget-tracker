@@ -1,7 +1,22 @@
 from database import get_connection
 
+def validate_expense(description, amount, category, date):
+    if not description.strip():
+        raise ValueError("Description cannot be empty")
 
+    if amount <= 0:
+        raise ValueError("Expense amount must be greater than zero")
+
+    if not category.strip():
+        raise ValueError("Category cannot be empty")
+
+    if not date:
+        raise ValueError("Date is required")
+
+    
 def add_expense(description, amount, category, date):
+    validate_expense(description, amount, category, date)
+    
     connection = get_connection()
 
     connection.execute(

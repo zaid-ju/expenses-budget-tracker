@@ -1,13 +1,28 @@
 from database import get_connection
 
 
+def validate_budget(category, amount, month):
+    if not category.strip():
+        raise ValueError("Category cannot be empty")
+
+    if amount <= 0:
+        raise ValueError("Budget amount must be greater than zero")
+
+    if not month:
+        raise ValueError("Month is required")
+
+    
 def add_budget(category, amount, month):
+    validate_budget(category, amount, month)
+
     connection = get_connection()
 
     connection.execute(
         """
         INSERT INTO budgets (category, amount, month)
         VALUES (?, ?, ?)
+        ON CONFLICT(category, month)
+        DO UPDATE SET amount = excluded.amount
         """,
         (category, amount, month)
     )
