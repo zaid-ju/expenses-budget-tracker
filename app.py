@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Expense & Budget Tracker"
+    return render_template("index.html")
 
 @app.route("/expenses")
 def expenses():
