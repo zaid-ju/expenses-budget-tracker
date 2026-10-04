@@ -31,7 +31,8 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             category TEXT NOT NULL,
             amount REAL NOT NULL,
-            month TEXT NOT NULL
+            month TEXT NOT NULL,
+            UNIQUE(category, month)
         )
     """)
 

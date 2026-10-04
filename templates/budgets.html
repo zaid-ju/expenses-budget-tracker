@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budgets</title>
+</head>
+
+<body>
+    <h1>Budgets</h1>
+
+    <h2>Add Budget</h2>
+
+    <form action="/budgets/add" method="POST">
+        <label>Category:</label>
+        <input type="text" name="category" required>
+
+        <label>Budget Amount:</label>
+        <input type="number" step="0.01" name="amount" required>
+
+        <label>Month:</label>
+        <input type="month" name="month" required>
+
+        <button type="submit">Add Budget</button>
+    </form>
+
+    <h2>Your Budgets</h2>
+
+    {% for budget in budgets %}
+        <p>
+            {{ budget["category"] }} -
+            Budget: €{{ budget["amount"] }} -
+            Spent: €{{ budget["spent"] }} -
+            Remaining: €{{ budget["remaining"] }} -
+            {{ budget["month"] }}
+        </p>
+    {% endfor %}
+
+</body>
+</html>
