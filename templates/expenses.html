@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses</title>
+</head>
+
+<body>
+    <h1>Expenses</h1>
+
+    <h2>Add Expense</h2>
+
+    <form action="/expenses/add" method="POST">
+        <label>Description:</label>
+        <input type="text" name="description" required>
+
+        <label>Amount:</label>
+        <input type="number" step="0.01" name="amount" required>
+
+        <label>Category:</label>
+        <input type="text" name="category" required>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Your Expenses</h2>
+
+    {% for expense in expenses %}
+        <p>
+            {{ expense["description"] }} -
+            €{{ expense["amount"] }} -
+            {{ expense["category"] }} -
+            {{ expense["date"] }}
+        </p>
+    {% endfor %}
+
+</body>
+</html>

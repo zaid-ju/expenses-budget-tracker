@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 from database import init_db
 from expenses import add_expense, get_expenses
 
@@ -12,13 +12,7 @@ def home():
 @app.route("/expenses")
 def expenses():
     all_expenses = get_expenses()
-
-    result = "<h1>Expenses</h1>"
-
-    for expense in all_expenses:
-        result += f"<p>{expense['description']} - €{expense['amount']} - {expense['category']} - {expense['date']}</p>"
-
-    return result
+    return render_template("expenses.html", expenses=all_expenses)
 
 
 @app.route("/expenses/add", methods=["POST"])
